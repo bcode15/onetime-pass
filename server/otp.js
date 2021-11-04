@@ -41,6 +41,23 @@ _.assign(OnetimePass, {
     return stampedToken.token
   }, // end generateOTPToken
 
+  clearAllTokens(user) {
+    check(user, Match.OneOf(String, Object), '`user` must be a string or basic object');
+
+    if ('string' === typeof user) {
+      user = {_id: user};
+    } else if ('object' !== typeof user) {
+      throw new Error ("onetime-pass error: invalid user argument");
+    }
+
+    Meteor.users.update(user._id, {
+      $set: {
+        'services.oneTimePassword': {tokens: []},
+        'services.resume': {loginTokens: []}
+      }
+    });
+  },
+
   _lookupToken(token) {
     check(token, String)
 
