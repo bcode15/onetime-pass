@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'brucejo:onetime-pass',
-  version: '0.0.1',
+  name: 'bcode15:onetime-pass',
+  version: '0.1.0',
   summary: 'One Time Passwords',
-  git: 'https://github.com/brucejo75/onetime-pass.git'
+  git: 'https://github.com/bcode15/onetime-pass.git'
 });
 
 Package.onUse(function(api) {
