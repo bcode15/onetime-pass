@@ -1,5 +1,4 @@
-OnetimePass = {
-
+const OnetimePass = {
   _defaultExpirationInSeconds: 24 * 60 * 60, // 1 day
 
   setDefaultExpirationInSeconds(expiration) {
@@ -13,3 +12,4 @@ OnetimePass = {
   }
 };
 
+export { OnetimePass };

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'bcode15:onetime-pass',
-  version: '0.1.0',
+  version: '0.2.0',
   summary: 'One Time Passwords',
   git: 'https://github.com/bcode15/onetime-pass.git'
 });
@@ -11,13 +11,8 @@ Package.onUse(function(api) {
            'mongo',
            'check']);
 
-  api.addFiles(['common/otp.js',
-                'common/OTPToken.js']);
-
-  api.addFiles(['client/otp.js'], 'client');
-
-  api.addFiles(['server/otp.js',
-                'server/loginHandler.js'], 'server');
+  api.mainModule('client.js', 'client');
+  api.mainModule('server.js', 'server');
 
   api.export('OnetimePass');
 });
