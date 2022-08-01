@@ -86,5 +86,9 @@ _.assign(OnetimePass, {
     if (OTPToken.isExpired) throw new Meteor.Error('oneTimePass.token-expired', OTPToken.expirationReason);
 
     return { user, savedToken };
-  } // end _lookupToken
+  }, // end _lookupToken
+
+  removeTokens(userSelect, tokenSelect) {
+    return Meteor.users.update(userSelect, {$pull: {'services.oneTimePassword.tokens': tokenSelect}});
+  }
 }); // end _.assign(OnetimePass, ...)
