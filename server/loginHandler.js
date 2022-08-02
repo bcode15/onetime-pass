@@ -49,6 +49,7 @@ Accounts.onLogin((data) => {
         'services.oneTimePassword.tokens.$.storedToken': resumeStampedToken
       },
       $unset: {
+        'services.oneTimePassword.tokens.$.pin': '',
         'services.oneTimePassword.tokens.$.hashedToken': '',
         'services.oneTimePassword.tokens.$.when': ''
       }
