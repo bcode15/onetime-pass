@@ -89,6 +89,17 @@ _.assign(OnetimePass, {
   }, // end _lookupToken
 
   removeTokens(userSelect, tokenSelect) {
-    return Meteor.users.update(userSelect, {$pull: {'services.oneTimePassword.tokens': tokenSelect}});
+    const user = Meteor.users.findOne(userSelect);
+    const token = _.find(user.services?.oneTimePassword?.tokens, tokenSelect);
+    if (!token) return;
+    // pull the OTP
+    const update = {$pull: {
+      'services.oneTimePassword.tokens': tokenSelect
+    }};
+    // if user is logged in, pull the resume token
+    if(token.storedToken) {
+      update.$pull['services.resume.loginTokens'] = {hashedToken: token.storedToken}
+    }
+    return Meteor.users.update(userSelect, update);
   }
 }); // end _.assign(OnetimePass, ...)
